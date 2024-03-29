@@ -1,10 +1,4 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot;
-
-import edu.wpi.first.wpilibj.XboxController;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -15,25 +9,21 @@ import edu.wpi.first.wpilibj.XboxController;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static class OperatorConstants {
-    public static final int kDriverControllerPort = 2;
-  }
-//Motor IDs
 
-  public static final int MOTOR_LEFT_1_ID = 30;
-  public static final int MOTOR_LEFT_2_ID = 21;
-  public static final int MOTOR_RIGHT_1_ID = 26;
-  public static final int MOTOR_RIGHT_2_ID = 22;
-  
-  
+    public static final int leftBackMotorId= 30;
+    public static final int rightBackMotorId= 26;
+    public static final int leftFrontMotorId= 21;
+    public static final int rightFrontMotorId = 22;
 
-  //Xbox values ID
-  public static final int xBoxId = 2;
-  public static final int LEFT_STICK_Y = 1;
-  public static final int RIGHT_STICK_Y = 5;
+    public static final int rampMotorId = 23;
+    public static final int triggerMotorId = 20;
 
-  public static final int RIGHT_STICK_Z = 10;
-  public static final int SHOOTER_MOTOR_1_ID = 23;
-  public static final int SHOOTER_MOTOR_2_ID = 20;
+    public static final int RAMP_MS = 500;
+    public static final long TRIGGER_MS = 500;
 
+
+    public static final int leftJoystickId= 0;
+    public static final int rightJoystickId= 1;
+
+    public static final int xBoxId=2;
 }

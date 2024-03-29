@@ -7,9 +7,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.ShootNode;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Shooter;
+import edu.wpi.first.wpilibj.Timer;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
+
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -18,14 +20,20 @@ import frc.robot.subsystems.Shooter;
  * project.
  */
 public class Robot extends TimedRobot {
-//instance of drivetrain subsystem
-  //public static DriveTrain driveTrain = new DriveTrain();
-
-
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-  private final Shooter shooter = new Shooter();
+  //private double startTime;
+
+ /* * private final TalonSRX[] motors={
+    new TalonSRX(Constants.leftBackMotorId),
+    new TalonSRX(Constants.rightBackMotorId),
+    new TalonSRX(Constants.leftBackMotorId),
+    new TalonSRX(Constants.rightBackMotorId),
+
+  //}'' /* */
+
+  //private DriveTrain m_driveTrain;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -39,8 +47,8 @@ public class Robot extends TimedRobot {
   }
 
   /**
-   * This function is called every 20 ms, no matter the mode. Use this for items like diagnostics
-   * that you want ran during disabled, autonomous, teleoperated and test.
+   * This function is called every robot packet, no matter the mode. Use this for items like
+   * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
    *
    * <p>This runs after the mode specific periodic functions, but before LiveWindow and
    * SmartDashboard integrated updating.
@@ -64,19 +72,29 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    
-    //CommandScheduler.getInstance().schedule(new ShootNode(shooter));
-
-    // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
-    }
+    m_robotContainer.doAuto();
   }
 
   /** This function is called periodically during autonomous. */
-  @Override
-  public void autonomousPeriodic() {}
+ // @Override
+  /*public void autonomousPeriodic() {
+    double time = Timer.getFPGATimestamp();
+    System.out.println(time - startTime);
+
+    if (time-startTime<3)
+    {
+      motors[2].set(ControlMode.Follower, motors[0].getBaseID());
+      motors[3].set(ControlMode.Follower, motors[1].getBaseID());
+
+
+      motors[1].setInverted(true);
+      motors[3].setInverted(true);
+    }
+
+    else{
+      m_driveTrain.setPercentOutput(0, 0);
+    }
+  }/* */
 
   @Override
   public void teleopInit() {
@@ -91,7 +109,9 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+
+  }
 
   @Override
   public void testInit() {
@@ -102,12 +122,4 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {}
-
-  /** This function is called once when the robot is first started up. */
-  @Override
-  public void simulationInit() {}
-
-  /** This function is called periodically whilst in simulation. */
-  @Override
-  public void simulationPeriodic() {}
 }
